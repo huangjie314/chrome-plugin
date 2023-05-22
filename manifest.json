@@ -1,0 +1,61 @@
+{
+  "manifest_version": 3,
+  "name": "Chrome插件demo",
+  "version": "0.1.0",
+  "description": "实现一个简单的Chrome插件",
+  "host_permissions": [
+    "file:///*",
+    "http://127.0.0.1:5500/*",
+    "https://oms.to8to.com/*",
+    "https://channels.weixin.qq.com/*",
+    "https://apigw.to8to.com/*"
+  ],
+  "permissions": [
+    "scripting",
+    "tabs",
+    "activeTab",
+    "contextMenus",
+    "cookies",
+    "storage"
+  ],
+  "background": {
+    "service_worker": "js/background.js",
+    "type": "module"
+  },
+  "icons": {
+    "48": "icon/icon.png",
+    "128": "icon/icon.png"
+  },
+  "action": {
+    "default_icon": {
+      "48": "icon/icon.png"
+    }
+    // "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "file:///*",
+        "http://127.0.0.1:5500/*",
+        "https://oms.to8to.com/*",
+        "https://channels.weixin.qq.com/*"
+      ],
+      "run_at": "document_idle",
+      "js": [
+        "js/content-script.js"
+      ],
+      "css": [],
+      "all_frames": true // reject in frames
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "js/sdk.js"
+      ],
+      "matches": [
+        "file:///*"
+      ]
+    }
+  ]
+}

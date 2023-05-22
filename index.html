@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body class="app">
+  <h1>主页面</h1>
+  <button onclick="handleClick()">获取插件状态</button>
+  <div id="output"></div>
+</body>
+<script>
+  window.addEventListener('message', evt => {
+    const { data } = evt;
+    if (data.from === 'chrome://extensions') {
+      document.getElementById('output').innerText = data.value;
+    }
+  })
+  function handleClick() {
+    window.postMessage({
+      opt: 'getState'
+    })
+  }
+</script>
+</html>
